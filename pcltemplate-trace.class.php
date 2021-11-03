@@ -117,7 +117,7 @@
     // -------------------------------------------------------------------------
     function PclTemplate()
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::PclTemplate', '');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::PclTemplate', '');
 
       $this->template_name = '';
       $this->tokens = array();
@@ -139,7 +139,7 @@
       $this->working_data = array();
       $this->working_data['user_data'] = array();
       
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, 1);
+      PclTraceFctEnd(__FILE__, __LINE__, 1);
       return;
     }
     // -------------------------------------------------------------------------
@@ -150,7 +150,7 @@
     // -------------------------------------------------------------------------
     function errorInfo()
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::errorInfo', '');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::errorInfo', '');
       
       $v_text = '';
       
@@ -164,7 +164,7 @@
       }
       $v_text = trim($v_text);
 
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_text);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_text);
       return($v_text);
     }
     // -------------------------------------------------------------------------
@@ -178,13 +178,13 @@
     // -------------------------------------------------------------------------
     function changeDelimiters($p_start_delimiter, $p_stop_delimiter)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::changeDelimiters', 'start="'.$p_start_delimiter.'", stop="'.$p_stop_delimiter.'"');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::changeDelimiters', 'start="'.$p_start_delimiter.'", stop="'.$p_stop_delimiter.'"');
       
       $this->token_start = $p_start_delimiter;
       $this->token_stop = $p_stop_delimiter;
 
       $v_result=1;
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -198,13 +198,13 @@
     // -------------------------------------------------------------------------
     function setGlobals($p_values)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::setGlobals', '');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::setGlobals', '');
       
       // TBC : Should check that this is a valid array
       $this->global_values = $p_values;
 
       $v_result=1;
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -221,7 +221,7 @@
     // -------------------------------------------------------------------------
     function parseFile($p_template)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::parseFile', 'template="'.$p_template.'"');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::parseFile', 'template="'.$p_template.'"');
       $v_result = 1;
       
       // ----- Reset logs
@@ -234,7 +234,7 @@
       $handle = @fopen($this->template_name, "r");
       if (!$handle) {
         $v_result = 0;
-        //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result, "Unable to open '".$this->template_name."'");
+        PclTraceFctEnd(__FILE__, __LINE__, $v_result, "Unable to open '".$this->template_name."'");
         return($v_result);
       }
 
@@ -247,7 +247,7 @@
       $v_result = $this->_parse_recursive($v_start_token, $v_buffer, $v_line_number, $handle);
       @fclose($handle);
       if ($v_result != 1) {
-        //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+        PclTraceFctEnd(__FILE__, __LINE__, $v_result);
         return($v_result);
       }
       
@@ -255,7 +255,7 @@
       $this->tokens = $v_start_token['tokens'];
       
       $v_result=1;
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -266,7 +266,7 @@
     // -------------------------------------------------------------------------
     function parseString($p_string)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::parseString', '');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::parseString', '');
       $v_result = 1;
       
       // ----- Reset logs
@@ -276,14 +276,14 @@
       $v_line_number = 0;
       $v_result = $this->_parse_recursive($v_start_token, $p_string, $v_line_number);
       if ($v_result != 1) {
-        //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+        PclTraceFctEnd(__FILE__, __LINE__, $v_result);
         return($v_result);
       }
       
       $this->tokens = $v_start_token['tokens'];
       
       $v_result=1;
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -298,7 +298,7 @@
     // -------------------------------------------------------------------------
     function _parse_recursive(&$p_token, &$p_buffer, &$p_line, $p_fd=0)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_parse_recursive', '');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_parse_recursive', '');
       $v_result = 1;
       
       // ----- Initialize
@@ -319,24 +319,24 @@
         // which means the line is a single text and we add it
         // in the current text token
         if (($v_pos = strpos($p_buffer,$this->token_start)) === FALSE) {
-          //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Line has no token");
+          PclTraceFctMessage(__FILE__, __LINE__, 3, "Line has no token");
           $v_token_list[$v_current_index]['text']  .= $p_buffer; 
           $p_buffer = '';          
         }
         
         // ----- The buffer has a start delimiter
         else {
-          //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Token found at '".$v_pos."'");
+          PclTraceFctMessage(__FILE__, __LINE__, 3, "Token found at '".$v_pos."'");
           $v_token_list[$v_current_index]['text']  .= substr($p_buffer, 0, $v_pos);
           $v_pos += strlen($this->token_start);
           $p_buffer = substr($p_buffer, $v_pos);
-          ////--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Start token : '".htmlentities($p_buffer)."'");
+          //PclTraceFctMessage(__FILE__, __LINE__, 3, "Start token : '".htmlentities($p_buffer)."'");
           $v_pos2 = strpos($p_buffer, $this->token_stop);
-          ////--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Line : '".htmlentities($p_buffer)."' end at ".$v_pos2);
+          //PclTraceFctMessage(__FILE__, __LINE__, 3, "Line : '".htmlentities($p_buffer)."' end at ".$v_pos2);
           //$v_token = strtolower(substr($p_buffer, $v_pos, $v_pos2-$v_pos));     
           $v_token = strtolower(substr($p_buffer, 0, $v_pos2));     
           $v_pos2 += strlen($this->token_stop);
-          //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "token is '".htmlentities($v_token)."'");
+          PclTraceFctMessage(__FILE__, __LINE__, 3, "token is '".htmlentities($v_token)."'");
           $p_buffer = substr($p_buffer, $v_pos2);
           
           // ----- Parse the token structure & Create the new token
@@ -346,13 +346,13 @@
             // If not then by default the type is 'token',
             // If yes, then it is a token with no name
             if ($this->_is_keyword($v_token)) {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "token is reserved keyword");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "token is reserved keyword");
               $v_token_list[$v_current_index]['type'] = $v_token;
               $v_token_list[$v_current_index]['name'] = '';
               $v_tok = $v_token;
             }
             else {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "value is not a reserved keyword, type is set to 'token'");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "value is not a reserved keyword, type is set to 'token'");
               $v_token_list[$v_current_index]['type'] = 'token';
               $v_token_list[$v_current_index]['name'] = $v_token;
               $v_tok = 'token';
@@ -361,41 +361,41 @@
           else {
             // ----- Separate token type from token name
             list($v_tok,$v_name) = explode(":", $v_token);
-            //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "short token is '".htmlentities($v_tok)."'");
-            //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "short name is '".htmlentities($v_name)."'");
+            PclTraceFctMessage(__FILE__, __LINE__, 3, "short token is '".htmlentities($v_tok)."'");
+            PclTraceFctMessage(__FILE__, __LINE__, 3, "short name is '".htmlentities($v_name)."'");
             $v_token_list[$v_current_index]['type'] = $v_tok;
             $v_token_list[$v_current_index]['name'] = $v_name;
           }
             
           switch ($v_tok) {
             case 'token' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
             break;
 
             case 'include' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
             break;
 
             case 'list.start' :
             case 'list' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
               $v_token_list[$v_current_index]['type'] = 'list';
               $v_result = $this->_parse_recursive($v_token_list[$v_current_index], $p_buffer, $p_line, $p_fd);
               if ($v_result != 1) {
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
             break;
 
             case 'list.stop' :
             case 'endlist' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'list')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'endlist' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
 
@@ -403,38 +403,38 @@
               unset($v_token_list[$v_current_index]);
               $p_token['tokens'] = $v_token_list;                
               $v_result=1;
-              //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+              PclTraceFctEnd(__FILE__, __LINE__, $v_result);
               return($v_result);      
             break;
 
             case 'list.empty.start' :
             case 'ifempty' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'list')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'ifempty' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
               $v_token_list[$v_current_index]['type'] = 'ifempty';
               $v_result = $this->_parse_recursive($v_token_list[$v_current_index], $p_buffer, $p_line, $p_fd);
               if ($v_result != 1) {
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
             break;
 
             case 'list.empty.stop' :
             case 'endifempty' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'ifempty')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected empty parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected empty parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'endifempty' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
 
@@ -442,38 +442,38 @@
               unset($v_token_list[$v_current_index]);
               $p_token['tokens'] = $v_token_list;                
               $v_result=1;
-              //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+              PclTraceFctEnd(__FILE__, __LINE__, $v_result);
               return($v_result);      
             break;
 
             case 'list.notempty.start' :
             case 'ifnotempty' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'list')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'ifnotempty' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
               $v_token_list[$v_current_index]['type'] = 'ifnotempty';
               $v_result = $this->_parse_recursive($v_token_list[$v_current_index], $p_buffer, $p_line, $p_fd);
               if ($v_result != 1) {
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
             break;
 
             case 'list.notempty.stop' :
             case 'endifnotempty' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'ifnotempty')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected ifnotempty parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected ifnotempty parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'endifnotempty' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
 
@@ -481,38 +481,38 @@
               unset($v_token_list[$v_current_index]);
               $p_token['tokens'] = $v_token_list;                
               $v_result=1;
-              //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+              PclTraceFctEnd(__FILE__, __LINE__, $v_result);
               return($v_result);      
             break;
 
             case 'list.item.start' :
             case 'item' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'list')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected list parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'item' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
               $v_token_list[$v_current_index]['type'] = 'item';
               $v_result = $this->_parse_recursive($v_token_list[$v_current_index], $p_buffer, $p_line, $p_fd);
               if ($v_result != 1) {
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
             break;
 
             case 'list.item.stop' :
             case 'enditem' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'item')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected item parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected item parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'enditem' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
 
@@ -520,30 +520,30 @@
               unset($v_token_list[$v_current_index]);
               $p_token['tokens'] = $v_token_list;                
               $v_result=1;
-              //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+              PclTraceFctEnd(__FILE__, __LINE__, $v_result);
               return($v_result);      
             break;
 
             case 'if.start' :
             case 'if' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
               $v_token_list[$v_current_index]['type'] = 'if';
               $v_result = $this->_parse_recursive($v_token_list[$v_current_index], $p_buffer, $p_line, $p_fd);
               if ($v_result != 1) {
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
             break;
 
             case 'if.stop' :
             case 'endif' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'if')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected 'if' parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected 'if' parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'endif' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
 
@@ -551,30 +551,30 @@
               unset($v_token_list[$v_current_index]);
               $p_token['tokens'] = $v_token_list;                
               $v_result=1;
-              //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+              PclTraceFctEnd(__FILE__, __LINE__, $v_result);
               return($v_result);      
             break;
 
             case 'ifnot.start' :
             case 'ifnot' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");          
               $v_token_list[$v_current_index]['type'] = 'ifnot';
               $v_result = $this->_parse_recursive($v_token_list[$v_current_index], $p_buffer, $p_line, $p_fd);
               if ($v_result != 1) {
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
             break;
 
             case 'ifnot.stop' :
             case 'endifnot' :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Valid token type '".$v_tok."' found");
               // ----- Check that the parent token is a list with same name
               if ((!isset($p_token['type'])) || ($p_token['type'] != 'ifnot')) {
-                //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected 'ifnot' parent");
+                PclTraceFctMessage(__FILE__, __LINE__, 3, "Template parse error : expected 'ifnot' parent");
                 $this->_error_log(PCL_TEMPLATE_ERR_SYNTAX, "Parsing error : unexpected token 'endifnot' in file '".$this->template_name."' line ".$p_line);
                 $v_result=PCL_TEMPLATE_ERR_SYNTAX;
-                //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+                PclTraceFctEnd(__FILE__, __LINE__, $v_result);
                 return($v_result);      
               }
 
@@ -582,12 +582,12 @@
               unset($v_token_list[$v_current_index]);
               $p_token['tokens'] = $v_token_list;                
               $v_result=1;
-              //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+              PclTraceFctEnd(__FILE__, __LINE__, $v_result);
               return($v_result);      
             break;
 
             default :
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Unknown token type '".$v_tok."', replacing by token");          
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Unknown token type '".$v_tok."', replacing by token");          
               $v_token_list[$v_current_index]['type'] = 'token';
           }
         
@@ -598,7 +598,7 @@
           $v_token_list[$v_current_index]['type'] = 'line';
           $v_token_list[$v_current_index]['text'] = '';
 
-          ////--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "current line : '".htmlentities($v_current_line)."'");
+          //PclTraceFctMessage(__FILE__, __LINE__, 3, "current line : '".htmlentities($v_current_line)."'");
         }
         
         if (($p_buffer == '') && ($p_fd != 0)) {
@@ -612,7 +612,7 @@
       $p_token['tokens'] = $v_token_list;
       
       $v_result=1;
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------  
@@ -630,7 +630,7 @@
     // -------------------------------------------------------------------------
     function generate($p_struct, $p_output='stdout', $p_filename='')
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::generate', 'filename="'.$p_filename.'"');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::generate', 'filename="'.$p_filename.'"');
       $v_result = 1;
       
       $fd = 0;
@@ -638,7 +638,7 @@
         if (!($fd = @fopen($p_filename, "w"))) {
           $v_result = PCL_TEMPLATE_ERR_WRITE_OPEN_FAIL;
           $this->_error_log(PCL_TEMPLATE_ERR_WRITE_OPEN_FAIL, "Unable to open file '".$p_filename."' in write mode.");
-          //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result, 'unable to open file "'.$p_filename.'"');
+          PclTraceFctEnd(__FILE__, __LINE__, $v_result, 'unable to open file "'.$p_filename.'"');
           return($v_result);
         }
       }
@@ -647,7 +647,7 @@
       $this->_set_system_values();
       
       // ----- Store the working structure
-      //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Store working data.");
+      PclTraceFctMessage(__FILE__, __LINE__, 3, "Store working data.");
       $this->working_data['user_data'] = &$p_struct;
       
       $v_result = $this->_generate($this->tokens, $p_struct, $p_output, $fd);
@@ -656,7 +656,7 @@
         @fclose($fd);
       }
       
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -670,12 +670,12 @@
     // -------------------------------------------------------------------------
     function _generate($p_token_list, &$p_struct, $p_output='stdout', $p_fd=0)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_generate', '');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_generate', '');
       $v_result = '';
       $v_global_result = '';
       
       foreach ($p_token_list as $v_token) {
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Look for token type '".$v_token['type']."'");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Look for token type '".$v_token['type']."'");
         $v_string = '';
         switch ($v_token['type']) {
           case 'line' :
@@ -695,13 +695,13 @@
               $v_string = (string)$v_value;
             }
             else {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Invalid value for token '".$v_token['name']."'");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Invalid value for token '".$v_token['name']."'");
             }
           break;
           case 'if' :
             // ----- Search for list with matching name
             $v_value = $this->_find_token($v_token['name'], $p_struct);
-            //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "look for ".$v_token['type']." condition");
+            PclTraceFctMessage(__FILE__, __LINE__, 3, "look for ".$v_token['type']." condition");
             
             // ----- A token with this name is found
             if ($v_value !== FALSE) {
@@ -713,11 +713,11 @@
               // a single value inside. 
               if (!is_array($v_value)) {
                 if (is_string($v_value)) {
-                  //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Value is a string");
+                  PclTraceFctMessage(__FILE__, __LINE__, 3, "Value is a string");
                   $v_string = $v_value;
                 }
                 else {
-                  //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Value is cast to a string");
+                  PclTraceFctMessage(__FILE__, __LINE__, 3, "Value is cast to a string");
                   $v_string = (string)$v_value;
                 }
                 $v_value = array();
@@ -727,24 +727,24 @@
               $v_string = $this->_generate($v_token['tokens'], $v_value, $p_output, $p_fd);
             }
             else {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "No value for token '".$v_token['name']."'");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "No value for token '".$v_token['name']."'");
             }
           break;
           case 'ifnot' :
             // ----- Search for list with matching name
             $v_value = $this->_find_token($v_token['name'], $p_struct);
-            //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "look for ".$v_token['type']." condition");
+            PclTraceFctMessage(__FILE__, __LINE__, 3, "look for ".$v_token['type']." condition");
             
             // ----- Look if found
             // If found, all the block is ignored.
             // If not found then the recursive call is done with the same 
             // struct
             if ($v_value === FALSE) {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Token ifnot not found. Call recursive with same struct.");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Token ifnot not found. Call recursive with same struct.");
               $v_string = $this->_generate($v_token['tokens'], $p_struct, $p_output, $p_fd);
             }
             else {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "No value for token '".$v_token['name']."'; Skip ifnot block.");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "No value for token '".$v_token['name']."'; Skip ifnot block.");
             }
           break;
           case 'list' :
@@ -757,7 +757,7 @@
               $v_string = $this->_generate($v_token['tokens'], $v_value, $p_output, $p_fd);
             }
             else {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Invalid value for token '".$v_token['name']."', or empty list");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Invalid value for token '".$v_token['name']."', or empty list");
               //$v_string = $this->_generate_list($v_token['tokens'], array(), $p_output, $p_fd);
             }
           break;
@@ -815,18 +815,18 @@
                                                    $p_output, $p_fd);              
             }
             else {
-              //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Invalid value for token '".$v_token['name']."' specific array expected");
+              PclTraceFctMessage(__FILE__, __LINE__, 3, "Invalid value for token '".$v_token['name']."' specific array expected");
               // TBC : error management ...
             }
           break;
           default :
-            //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "No rule to manage '".$v_token['type']."'");
+            PclTraceFctMessage(__FILE__, __LINE__, 3, "No rule to manage '".$v_token['type']."'");
           break;
         }
         
         if (!is_string($v_string)) {
           $v_result = 0;
-          //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+          PclTraceFctEnd(__FILE__, __LINE__, $v_result);
           return($v_result);
         }
       
@@ -843,7 +843,7 @@
           default :
             $this->_error_log(PCL_TEMPLATE_ERR_INVALID_PARAMETER, "Unsupported parameter '".$p_output."'");
             $v_result = 0;
-            //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+            PclTraceFctEnd(__FILE__, __LINE__, $v_result);
             return($v_result);
           break;
         }
@@ -856,7 +856,7 @@
         $v_result = PCL_TEMPLATE_ERR_NO_ERROR;
       }
       
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -870,7 +870,7 @@
     // -------------------------------------------------------------------------
     function _generate_include($p_filename, &$p_struct, $p_output='stdout', $p_fd=0)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_generate_include', "filename='".$p_filename."'");
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_generate_include', "filename='".$p_filename."'");
       $v_result = '';
       
       // ----- Create the template object
@@ -886,7 +886,7 @@
         $this->error_list = array_merge($this->error_list,
                                         $v_template->error_list);
         $v_result = 0;
-        //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+        PclTraceFctEnd(__FILE__, __LINE__, $v_result);
         return($v_result);
       }
       
@@ -897,7 +897,7 @@
       $v_template->setGlobals($this->global_values);
       
       // ----- Store working data in included template
-      //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Store working data in included template");
+      PclTraceFctMessage(__FILE__, __LINE__, 3, "Store working data in included template");
       $v_template->working_data['user_data'] = &$this->working_data['user_data'];
 
       // ----- Generate result
@@ -907,7 +907,7 @@
       // ----- Unset
       unset($v_template);
 
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -929,11 +929,11 @@
     // -------------------------------------------------------------------------
     function _find_token($p_token_name, &$p_struct)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_find_token', 'token="'.$p_token_name.'"');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_find_token', 'token="'.$p_token_name.'"');
       
       if (!is_array($p_struct)) {
         $v_result = FALSE;
-        //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result, "argument is not an array");
+        PclTraceFctEnd(__FILE__, __LINE__, $v_result, "argument is not an array");
         return($v_result);
       }
       
@@ -944,26 +944,26 @@
       // TBC : This should be change to way to access hierarchical data
       //       in the future
       if ($v_type == '.') {
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a system value");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a system value");
         $v_struct = &$this->working_data['user_data'];
         $p_token_name = substr($p_token_name, 1);
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Resulting token_name is '".$p_token_name."'");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Resulting token_name is '".$p_token_name."'");
       }
       
       // ----- Look for globally defined tokens
       elseif ($v_type == '%') {
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a global value");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a global value");
         $v_struct = &$this->global_values;
         $p_token_name = substr($p_token_name, 1);
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Resulting token_name is '".$p_token_name."'");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Resulting token_name is '".$p_token_name."'");
       }
       
       // ----- Look for system reserved tokens
       elseif ($v_type == '$') {
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a system value");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a system value");
         $v_struct = &$this->system_values;
         $p_token_name = substr($p_token_name, 1);
-        //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Resulting token_name is '".$p_token_name."'");
+        PclTraceFctMessage(__FILE__, __LINE__, 3, "Resulting token_name is '".$p_token_name."'");
       }
       
       // ----- Look for single word token
@@ -972,22 +972,22 @@
       }
       
       if (isset($v_struct[$p_token_name])) {
-          //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, 1, "found by direct index");
+          PclTraceFctEnd(__FILE__, __LINE__, 1, "found by direct index");
           return($v_struct[$p_token_name]);
       }
       
       if (is_array($v_struct)) {
         foreach ($v_struct as $v_key => $v_item) {
-          //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 3, "Look for value with key '".$v_key."'");
+          PclTraceFctMessage(__FILE__, __LINE__, 3, "Look for value with key '".$v_key."'");
           if (strtolower($v_key) == $p_token_name) {
-            //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, 1, "found by strtolower");
+            PclTraceFctEnd(__FILE__, __LINE__, 1, "found by strtolower");
             return($v_item);
           }
         }
       }
 
       $v_result = FALSE;
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result, "not found");
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result, "not found");
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -999,7 +999,7 @@
     // -------------------------------------------------------------------------
     function _is_keyword($p_token)
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_is_keyword', 'token="'.$p_token.'"');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_is_keyword', 'token="'.$p_token.'"');
       $v_pcltemplate_keywords = array(
                                   'token',
                                   'list', 'endlist',
@@ -1010,7 +1010,7 @@
                                   'ifnot', 'endifnot',
                                   'include');
       $v_result = in_array($p_token, $v_pcltemplate_keywords);
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
@@ -1022,7 +1022,7 @@
     // -------------------------------------------------------------------------
     function _set_system_values()
     {
-      //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_set_system_values');
+      PclTraceFctStart(__FILE__, __LINE__, 'PclTemplate::_set_system_values');
       $v_result = 1;
       
       // ----- Template file information
@@ -1055,7 +1055,7 @@
       // ----- Date
       $this->system_values['date'] = date('Y/m/d h:i:s');
 
-      //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
+      PclTraceFctEnd(__FILE__, __LINE__, $v_result);
       return($v_result);
     }
     // -------------------------------------------------------------------------
