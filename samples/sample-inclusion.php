@@ -12,8 +12,8 @@
 // -----------------------------------------------------------------------------
 
   require_once('../pcltrace.lib.php');
-  require_once('../pcltemplate-trace.class.php');
-  //require_once('../pcltemplate.class.php');
+  //require_once('../pcltemplate-trace.class.php');
+  require_once('../pcltemplate.class.php');
   
   //PclTraceOn(5);
 
