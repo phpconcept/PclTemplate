@@ -5,8 +5,6 @@
 // Vincent Blavet - vincent@phpconcept.net
 // http://www.phpconcept.net
 // -----------------------------------------------------------------------------
-// $Id$
-// -----------------------------------------------------------------------------
 
 
 Introduction
@@ -25,6 +23,22 @@ Introduction
 What's new
 ==========
 
+  Version 0.6 :
+    - Test PclTemplate with PHP 7.3.31.
+    - Add system token $path_document_root with the path to document root.
+
+  Version 0.6-RC2 :
+    - Adding support for global values. Global values are prefixed by %, and
+      are not hierarchical. They are available everywhere in the template.
+      Global tokens prefixed with '.' (0.6-RC1) should be seens as deprecated.
+    - Correct a bug with included files that only support default delimiters
+
+  Version 0.6-RC1 :
+    - Adding support for system tokens. System tokens begins with $. 
+      Defined tokens are : filename, filepath, path_from_root, date
+    - Support for global token name prefixed with '.'
+    - Correct a bug with [ifempty] tag in list.
+    
   Version 0.5 :
     - Add support for including template files in template, by using
       keyword 'include'.

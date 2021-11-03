@@ -8,11 +8,9 @@
 // Overview :
 //   See http://www.phpconcept.net/pcltemplate for more information
 // -----------------------------------------------------------------------------
-// CVS : $Id$
-// -----------------------------------------------------------------------------
   
   // ----- Global Constants
-  define('PCL_TEMPLATE_VERSION', '0.6-RC4');
+  define('PCL_TEMPLATE_VERSION', '0.6');
   if (!defined('PCL_TEMPLATE_START')) define('PCL_TEMPLATE_START', '<!--(');
   if (!defined('PCL_TEMPLATE_STOP')) define('PCL_TEMPLATE_STOP', ')-->');
   if (!defined('PCL_DOCUMENT_ROOT')) {
@@ -90,6 +88,8 @@
     //   system_values['path_from_root'] : The path from the web server root if
     //                                     any. i.e. path relative to 
     //                                     $_SERVER['DOCUMENT_ROOT']
+    //   system_values['path_document_root'] : The path of the web server root 
+    //                                         if any i.e. PCL_DOCUMENT_ROOT
     //   system_values['date'] : Date when the file is generated format is
     //                           YYYY/MM/DD hh:mm:ss
     var $system_values;
@@ -943,6 +943,7 @@
       // In order to use global values, we need to use working data
       // TBC : This should be change to way to access hierarchical data
       //       in the future
+      // USE of '.' is DEPRECATED. Please use '$' for system values
       if ($v_type == '.') {
         PclTraceFctMessage(__FILE__, __LINE__, 3, "Token name is a system value");
         $v_struct = &$this->working_data['user_data'];
@@ -1029,6 +1030,7 @@
       $this->system_values['filename'] = '';
       $this->system_values['filepath'] = '';
       $this->system_values['path_from_root'] = '';
+      $this->system_values['path_document_root'] = PCL_DOCUMENT_ROOT;
       if ($this->template_name != '') {
         // ----- Template file info from filesystem
         $v_att = pathinfo($this->template_name);
